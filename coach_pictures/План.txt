@@ -1,0 +1,47 @@
+Порядок:
+
+1. Python
+	PEP8
+	понятный нейминг переменных, функций
+	типы данных (что и для чего)
+	аннотация типов (Optional, Annotated, Union, Any)
+	multiprocessing и theading
+	ООП
+По итогу: 
+	попробовать все типы данных, их методы
+	функции + аннотации
+
+2. FastAPI (Артем Шумейко) + SQLALchemy + Celery + Redis + Jinja2 + Middleware
+	курсы
+	официальная документация
+	статьи в инете
+	регистрация и аутентификация пользователей
+	Pydantic
+По итогу: 
+	напиши микросервис
+
+3. SQL / PostgreSQL
+	курсовую напиши
+
+4. Docker / docker-compose / docker build ...
+	написать dockerfile
+	написать docker-compose.yaml
+
+5. SQLALchemy (ORM)
+	psycopg2
+	psycopg2-binary
+	asyncpg
+	sqlite 
+
+6. PyQt5 / tkinter / PySide
+
+7. логгирование + try-except
+
+PyQt5
+rabbitMQ
+Redis
+параллелизм
+асинхронность
+PyTorch
+
+WSL
