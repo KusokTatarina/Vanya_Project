@@ -1,6 +1,7 @@
 from sqlalchemy import delete, insert, select
 from database import async_session
 from models import Coach
+from orm import return_one_object
 from router_coach.shemas_coach import CoachReturn, CoachShemas
 
 
@@ -44,14 +45,11 @@ class RepositoryCoach:
             up_coach.name, up_coach.type_dance = data.name, data.type_dance
             await sess.commit()
             await sess.refresh(up_coach)
-            return up_coach.id
+            return await return_one_object(Coach, data.id)
         
     @classmethod
     async def delete_coach(cls, id: int):
             async with async_session() as session:
-                # query = delete(Coach).filter_by(id=id)
-                # await session.execute(query)
-                # await session.commit()
                 del_coach = await session.get(Coach, id)
                 await session.delete(del_coach)   
                 await session.commit()

@@ -7,7 +7,7 @@ from typing import Annotated, Optional
 from router_person.shemas_person import Rank
 from router_person.repository_person import RepositoryPerson
 from router_person.shemas_person import PersonShemas, ReturnPerson
-from tuta import SAVE_PATH
+from config import SAVE_PATH
 
 
 app = APIRouter(
@@ -22,17 +22,6 @@ async def add_person(data: Annotated[PersonShemas, Depends()], photo: UploadFile
         content = await photo.read()
         f.write(content)
     return await RepositoryPerson.add_person(data)
-    
-
-
-
-# @app.post('/')
-# async def add_person(lastname: str,collective_id: int, town: str, rank: Rank , scores: Optional[int], photo: UploadFile = File(...)):
-#     saved_file_path = os.path.join(SAVE_PATH, photo.filename)
-#     with open(saved_file_path, "wb") as f:
-#         content = await photo.read()
-#         f.write(content)
-#     return await RepositoryPerson.add_person(lastname, collective_id, saved_file_path, town, rank, scores)
     
 
 @app.get('/one')

@@ -46,7 +46,6 @@ async def view_all():
             Person.rank.label('Person_rank'),
             Person.scores.label('Person_scores')
         )
-        .select_from(TypeDance)
         .join(Coach, TypeDance.id == Coach.type_dance)
         .join(Collective, Coach.id == Collective.name_coach)
         .join(Person, Collective.id == Person.collective_id)

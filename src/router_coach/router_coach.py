@@ -23,12 +23,13 @@ async def get_one_coach(id: int) -> CoachReturn:
 @app.post('/')
 async def add_coach(data: Annotated[CoachShemas, Depends()]):
     add_coach = await RepositoryCoach.add_one_coach(data)
-    return f"Вы добавили тренера {data.name} с id={add_coach}"
+    return f"Вы добавили тренера {data.name}"
 
 @app.put('/')
 async def update_coach(data: Annotated[CoachReturn, Depends()]):
     up_coach = await RepositoryCoach.update_coach(data)
-    return f"Вы обновили Тренера с id={up_coach} на {data.name} по танцам с id={data.type_dance}"
+    # return f"Вы обновили Тренера с id={up_coach} на {data.name} по танцам с id={data.type_dance}"
+    return up_coach
 
 @app.delete('/')
 async def delete_coach(id: int):

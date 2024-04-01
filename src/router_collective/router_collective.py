@@ -12,7 +12,7 @@ app = APIRouter(
 @app.post('/')
 async def add_collective(data: Annotated[CollectiveShemas, Depends()])->str:
     add_coll = await RepositoryCollective.add_collective(data)
-    return f"Вы добавили коллектив: {add_coll}"
+    return add_coll
 
 @app.get('/one')
 async def get_one_collective(id: int) -> CollectiveReturn:

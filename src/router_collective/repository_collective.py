@@ -1,4 +1,5 @@
 from sqlalchemy import delete, insert, select, update
+from orm import return_one_object
 from router_collective.shemas_collective import CollectiveReturn, CollectiveShemas
 from database import async_session
 from models import Collective
@@ -14,9 +15,7 @@ class RepositoryCollective:
             session.add(add_collective)
             await session.commit()
             await session.refresh(add_collective)
-            sel = select(Collective).filter_by(id=add_collective.id)
-            result = await session.execute(sel)
-            return result.scalar_one()
+            return await return_one_object(Collective, add_collective.id)
 
     @classmethod
     async def get_one_collective(cls, id:int) -> CollectiveReturn:
@@ -27,7 +26,7 @@ class RepositoryCollective:
             return result
         
     @classmethod
-    async def get_all_collective(cls):
+    async def get_all_collective(cls) -> list[CollectiveReturn]:
         async with async_session() as session:
             query = select(Collective)
             result = await session.execute(query)
@@ -44,20 +43,15 @@ class RepositoryCollective:
             await session.execute(stmt)
             query = select(Collective).filter_by(id=data.id)
             result = await session.execute(query)
-            result = result.scalar_one()
-            return result
-            # await session.refresh(stmt)
-            # return await session.get(Collective, data.id)
-            # up_coll = await session.get(Collective, data.id)
-            # up_coll.name = data.name
+            return await return_one_object(Collective, data.id)
+            
         
     @classmethod
-    async def delete_collective(cls, id:int) -> str:
+    async def delete_collective(cls, id:int) -> CollectiveReturn:
         async with async_session() as session:
             delte_coll = await session.get(Collective, id)
             await session.delete(delte_coll)
             await session.commit()
             # stmt = delete(Collective).filter_by(id=id)
             # await session.execute(stmt)
-            return f'Вы удалили коллектив {delte_coll.name} с id={delte_coll.id}'
-
+            return await return_one_object(Collective, id)
